@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Container } from '../styles'
+import { Container, ButtonSecondary, ButtonPrimary } from '../styles/styles'
 
 const Section = styled.section`
   padding: 100px 0;
@@ -12,13 +12,13 @@ const SectionPromotional = styled(Section)`
   color: #fff;
 `
 const SectionPromotionalSecondary = styled(Section)`
-  background-color: #f6efdf;
+  background-color: ${props => props.theme.secondary};
 `
 const SectionSearch = styled(Section)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f74c3c;
+  background-color: ${props => props.theme.primary};
   color: #fff;
 `
 const SectionPackages = styled(Section)`
@@ -53,7 +53,7 @@ export default class Home extends React.Component {
             <h2>Get Cashback up to 50%</h2>
             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
               consectur justo eu nunc consequat.</h3>
-            <button>Order Now</button>
+            <ButtonPrimary>Order Now</ButtonPrimary>
           </Container>
         </SectionPromotional>
         <SectionPromotionalSecondary>
@@ -61,7 +61,7 @@ export default class Home extends React.Component {
             <h2>Big Burger</h2>
             <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit. Vivamus
               lacinia odio vitae vestibulum vestibulum.</h3>
-            <button>Order Now</button>
+            <ButtonPrimary>Order Now</ButtonPrimary>
           </Container>
         </SectionPromotionalSecondary>
         <SectionSearch>
@@ -70,7 +70,7 @@ export default class Home extends React.Component {
             <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit. Vivamus
               lacinia odio vitae vestibulum vestibulum.</h3>
             <input/>
-            <button>Search</button>
+            <ButtonSecondary>Search</ButtonSecondary>
           </Container>
         </SectionSearch>
         <SectionPackages>
@@ -82,21 +82,21 @@ export default class Home extends React.Component {
                 <Icon icon={faHamburger} />
                 <span>Price</span>
                 <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <button>Order Now</button>
+                <ButtonPrimary>Order Now</ButtonPrimary>
               </PackageCard>
               <PackageCard>
                 <h3>Package 2</h3>
                 <Icon icon={faHamburger} />
                 <span>Price</span>
                 <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <button>Order Now</button>
+                <ButtonPrimary>Order Now</ButtonPrimary>
               </PackageCard>
               <PackageCard>
                 <h3>Package 3</h3>
                 <Icon icon={faHamburger} />
                 <span>Price</span>
                 <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <button>Order Now</button>
+                <ButtonPrimary>Order Now</ButtonPrimary>
               </PackageCard>
             </PackageList>
           </Container>

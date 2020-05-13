@@ -11,6 +11,14 @@ const NavList = styled.ul`
   flex-direction: row;
   justify-content: space-between;
 `
+const NavItem = styled(Link)`
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  
+`
 
 export default class NavComponent extends React.Component {
   render () {
@@ -18,19 +26,19 @@ export default class NavComponent extends React.Component {
       <Nav>
         <NavList>
           <li>
-            <Link to="/">Home</Link>
+            <NavItem to="/">Home</NavItem>
           </li>
           <li>
-            <Link to="/search">Search</Link>
+            <NavItem to="/search">Search</NavItem>
           </li>
           <li>
-            <Link to="/promo">Promo</Link>
+            <NavItem to="/promo">Promo</NavItem>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <NavItem to="/about">About</NavItem>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <NavItem to="/contact">Contact</NavItem>
           </li>
         </NavList>
       </Nav>
