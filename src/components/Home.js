@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Container, ButtonSecondary, ButtonPrimary } from '../styles/styles'
+import {
+  Container,
+  ButtonSecondary,
+  ButtonPrimary,
+} from '../styles/styles'
+import SearchWidgetComponent from './SearchWidgetComponent'
 
 const Section = styled.section`
   padding: 100px 0;
@@ -15,11 +20,14 @@ const SectionPromotionalSecondary = styled(Section)`
   background-color: ${props => props.theme.secondary};
 `
 const SectionSearch = styled(Section)`
+  background-color: ${props => props.theme.primary};
+  color: #fff;
+`
+const SearchWrapper = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${props => props.theme.primary};
-  color: #fff;
+  justify-content: space-between;
 `
 const SectionPackages = styled(Section)`
   display: flex;
@@ -43,8 +51,8 @@ const PackageCard = styled.li`
 const Icon = styled(FontAwesomeIcon)`
   font-size: 4rem;
 `
-
 export default class Home extends React.Component {
+
   render () {
     return (
       <div>
@@ -65,13 +73,13 @@ export default class Home extends React.Component {
           </Container>
         </SectionPromotionalSecondary>
         <SectionSearch>
-          <Container>
+          <SearchWrapper>
             <h2>Search the Best Burguers</h2>
             <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit. Vivamus
               lacinia odio vitae vestibulum vestibulum.</h3>
-            <input/>
+            <SearchWidgetComponent/>
             <ButtonSecondary>Search</ButtonSecondary>
-          </Container>
+          </SearchWrapper>
         </SectionSearch>
         <SectionPackages>
           <Container>

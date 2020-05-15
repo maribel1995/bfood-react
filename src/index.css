@@ -17,3 +17,7 @@ h3 {
   font-weight: 400;
 }
 
+*:focus {
+  outline: none;
+}
+
