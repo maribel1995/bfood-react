@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '../styles/styles'
+import { Container } from '../../style/styles'
 import styled from 'styled-components'
 
 const Section = styled.section`

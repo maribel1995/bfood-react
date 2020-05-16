@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Search from './components/Search'
-import Home from './components/Home'
-import HeaderComponent from './components/HeaderComponent'
-import FooterComponent from './components/FooterComponent'
+import Search from './views/Search/Search'
+import Home from './views/Home/Home'
+import HeaderComponent from './shared/layout/Header'
+import FooterComponent from './shared/layout/Footer'
 
 function App() {
   return (

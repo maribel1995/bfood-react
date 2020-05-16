@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Container } from '../styles/styles'
+import { Container } from '../../style/styles'
 import { faFacebook, faTwitter, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -43,7 +43,7 @@ const SocialIcon = styled(FontAwesomeIcon)`
   }
 `
 
-export default class FooterComponent extends React.Component {
+export default class extends React.Component {
   render () {
     return (
       <Footer>

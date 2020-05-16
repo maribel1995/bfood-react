@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { faHamburger } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ButtonPrimary, Container } from '../styles/styles'
-import SearchWidgetComponent from './SearchWidgetComponent'
+import { ButtonPrimary, Container } from '../../style/styles'
+import SearchWidgetComponent from './SearchWidget'
+import CardComponent from '../../shared/Card'
 
 const Section = styled.section`
   min-height: 800px;
@@ -56,26 +55,6 @@ const PackageList = styled.ul`
   justify-content: space-between;
   padding: 0;
 `
-const PackageCard = styled.li`
-  background-color: #fff;
-  
-  padding: 15px 10px;
-  width: 350px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 10px;
-  box-sizing: border-box;
-`
-const HamburgerIcon = styled(FontAwesomeIcon)`
-  font-size: 6rem;
-  margin-bottom: 1rem;
-`
-const Price = styled.span`
-  font-size: 2rem;
-`
 const BurgerImage = styled.img`
   border-radius: 50%
 `
@@ -120,27 +99,9 @@ export default class Home extends React.Component {
           <Container>
             <h2>Popular Package</h2>
             <PackageList>
-              <PackageCard>
-                <h3>Package 1</h3>
-                <HamburgerIcon icon={faHamburger}/>
-                <Price>$ 10.00</Price>
-                <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <ButtonPrimary to="/">Order Now</ButtonPrimary>
-              </PackageCard>
-              <PackageCard>
-                <h3>Package 2</h3>
-                <HamburgerIcon icon={faHamburger}/>
-                <Price>$ 20.00</Price>
-                <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <ButtonPrimary to="/">Order Now</ButtonPrimary>
-              </PackageCard>
-              <PackageCard>
-                <h3>Package 3</h3>
-                <HamburgerIcon icon={faHamburger}/>
-                <Price>$ 30.00</Price>
-                <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <ButtonPrimary to="/">Order Now</ButtonPrimary>
-              </PackageCard>
+              <CardComponent name="Package 1" price="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
+              <CardComponent name="Package 1" price="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
+              <CardComponent name="Package 1" price="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
             </PackageList>
           </Container>
         </SectionPackages>

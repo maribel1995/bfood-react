@@ -20,7 +20,7 @@ const NavItem = styled(Link)`
   
 `
 
-export default class NavComponent extends React.Component {
+export default class extends React.Component {
   render () {
     return (
       <Nav>

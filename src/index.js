@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
-import './index.css';
-import App from './App';
+import './app/style/index.css';
+import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'styled-components';
-import BFoodTheme from './styles/themes/bfood';
+import BFoodTheme from './app/style/themes/bfood';
 
 ReactDOM.render(
   <React.StrictMode>

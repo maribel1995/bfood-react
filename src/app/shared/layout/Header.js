@@ -1,9 +1,9 @@
 import React from 'react'
-import NavComponent from './NavComponent'
+import NavComponent from './Nav'
 import styled from 'styled-components'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Container } from '../styles/styles'
+import { Container } from '../../style/styles'
 
 const Header = styled.header`
   position: absolute;
@@ -24,7 +24,7 @@ const Logo = styled(FontAwesomeIcon)`
   font-size: 3.25rem;
 `
 
-export default class HeaderComponent extends React.Component {
+export default class extends React.Component {
   render () {
     return (
         <Header>

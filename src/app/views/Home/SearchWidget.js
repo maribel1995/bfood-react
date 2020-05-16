@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ButtonSecondary } from '../styles/styles'
+import { ButtonSecondary } from '../../style/styles'
 
 const Input = styled.input`
   border: none;
@@ -37,7 +37,7 @@ const CitiesList = styled.ul`
   padding: 0;
   margin-left: 35px;
 `
-const CitiesListItem = styled.ul`
+const CitiesListItem = styled.li`
   color: #000;
   font-size: 2rem;
   padding: 15px 10px;
@@ -49,7 +49,7 @@ const SearchInput = styled(Input)`
   margin-bottom: 2rem
 `
 
-export default class SearchWidgetComponent extends React.Component {
+export default class extends React.Component {
   constructor (props) {
     super(props)
     this.state = { search: '', items: [], isLoaded: false, selected: 0 }
@@ -64,30 +64,33 @@ export default class SearchWidgetComponent extends React.Component {
     if (event.target.value.length < 4)
       return
 
+    this.getCities(this.state.search).then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          isLoaded: true,
+          items: result.location_suggestions.map(
+            city => <CitiesListItem key={city.id}
+                                    onClick={() => this.selectItem(
+                                      city)}>{city.name}</CitiesListItem>),
+        })
+      },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error,
+        })
+      },
+    )
+  }
+
+  getCities(search) {
     const headers = new Headers()
     headers.set('user-key', '77576b2dae845bf32c1de0795a7753e1')
 
-    fetch(
-      `https://developers.zomato.com/api/v2.1/cities?q=${this.state.search}`,
+    return fetch(
+      `https://developers.zomato.com/api/v2.1/cities?q=${search}`,
       { headers: headers })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.location_suggestions.map(
-              city => <CitiesListItem key={city.id}
-                                      onClick={() => this.selectItem(
-                                        city)}>{city.name}</CitiesListItem>),
-          })
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error,
-          })
-        },
-      )
   }
 
   selectItem ({ name, id }) {
@@ -108,7 +111,7 @@ export default class SearchWidgetComponent extends React.Component {
         <InputField>
           <Icon icon={faMapMarkerAlt}/>
           <SearchInput value={this.state.search} onChange={this.handleChange}
-                       placeholder="Ex. São Paulo"/>
+                       placeholder="Ex. São Paulo" className="cities-input"/>
           {this.getResults()}
         </InputField>
         <ButtonSecondary
