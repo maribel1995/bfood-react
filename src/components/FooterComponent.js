@@ -10,7 +10,10 @@ const Footer = styled.footer`
   justify-content: space-around;
   background-color: #222323;
   color: #fff;
-  line-height: 1.5rem;
+  line-height: 2rem;
+  font-size: 1.5rem;
+  min-height: 500px;
+  padding-top: 150px;
 `
 const Section = styled.section`
   padding: 20px 0;
@@ -31,7 +34,8 @@ const FooterContainer = styled(Container)`
 const SocialIcon = styled(FontAwesomeIcon)`
   background: #fff;
   border-radius: 50%;
-  width: 18px !important;
+  width: 2rem !important;
+  height: 2rem;
   color: #000;
   padding: 5px;
   &:not(:first-child) {

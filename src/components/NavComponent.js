@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Nav = styled.ul`
-  width: 40%;
+  width: 60%;
 `
 const NavList = styled.ul`
   list-style: none;
@@ -15,8 +15,8 @@ const NavItem = styled(Link)`
   text-decoration: none;
   color: #fff;
   text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1rem;
+  font-weight: 900;
+  font-size: 1.5rem;
   
 `
 

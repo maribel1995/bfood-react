@@ -11,8 +11,8 @@ const Header = styled.header`
   left: 0;
   width: 100%;
   color: #fff;
-  line-height: 3.25rem;
-  background-color: #222323;
+  line-height: 6.25rem;
+  background: linear-gradient(rgba(0,0,0,.9), rgba(0,0,0,0));
 `
 const HeaderContainer = styled(Container)`
   display: flex;
