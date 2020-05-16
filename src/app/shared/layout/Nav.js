@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Nav = styled.ul`
+const Nav = styled.div`
   width: 60%;
 `
 const NavList = styled.ul`

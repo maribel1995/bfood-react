@@ -14,7 +14,7 @@ export const ButtonPrimary = styled(Link)`
   border: none;
   border-radius: 25px;
   padding: 12px 45px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;

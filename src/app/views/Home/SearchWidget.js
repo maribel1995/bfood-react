@@ -111,7 +111,9 @@ export default class extends React.Component {
         <InputField>
           <Icon icon={faMapMarkerAlt}/>
           <SearchInput value={this.state.search} onChange={this.handleChange}
-                       placeholder="Ex. São Paulo" className="cities-input"/>
+                       placeholder="Ex. São Paulo" className="cities-input"
+                       aria-label="Buscar restaurantes por Cidade"
+          />
           {this.getResults()}
         </InputField>
         <ButtonSecondary

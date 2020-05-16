@@ -11,7 +11,7 @@ const SectionPromotional = styled(Section)`
   min-height: 600px;
   padding: 100px 0;
   color: #fff;
-  background-image: url("/home-background.jpg");
+  background-image: url("/home-background.webp");
   background-position: right;
   background-repeat: no-repeat;
   background-color: rgba(24,20,21,0.99);
@@ -25,7 +25,7 @@ const SectionMainProduct = styled(Section)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url("/food-background1.jpg");
+  background-image: url("/food-background1.webp");
 `
 const MainProductContainer = styled(Container)`
   display: flex;
@@ -47,7 +47,7 @@ const SectionPackages = styled(Section)`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-image: url("/food-background2.jpg");
+  background-image: url("/food-background2.webp");
 `
 const PackageList = styled.ul`
   display: flex;
@@ -83,7 +83,7 @@ export default class Home extends React.Component {
                 lacinia odio vitae vestibulum vestibulum.</h3>
               <ButtonPrimary to="/">Order Now</ButtonPrimary>
             </div>
-            <BurgerImage src="/hamburger-photo.jpg"/>
+            <BurgerImage src="/hamburger-photo.webp" loading="lazy" alt=""/>
           </MainProductContainer>
         </SectionMainProduct>
         <SectionSearch>
