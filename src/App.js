@@ -12,7 +12,7 @@ function App() {
         <HeaderComponent />
 
         <Switch className="page">
-          <Route path="/search">
+          <Route path="/search/:city">
             <Search/>
           </Route>
           <Route path="/">

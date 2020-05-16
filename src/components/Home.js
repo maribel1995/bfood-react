@@ -1,12 +1,8 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  Container,
-  ButtonSecondary,
-  ButtonPrimary,
-} from '../styles/styles'
+import { ButtonPrimary, Container } from '../styles/styles'
 import SearchWidgetComponent from './SearchWidgetComponent'
 
 const Section = styled.section`
@@ -59,26 +55,28 @@ export default class Home extends React.Component {
         <SectionPromotional>
           <Container>
             <h2>Get Cashback up to 50%</h2>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse
               consectur justo eu nunc consequat.</h3>
-            <ButtonPrimary>Order Now</ButtonPrimary>
+            <ButtonPrimary to="/">Order Now</ButtonPrimary>
           </Container>
         </SectionPromotional>
         <SectionPromotionalSecondary>
           <Container>
             <h2>Big Burger</h2>
-            <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit. Vivamus
+            <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit.
+              Vivamus
               lacinia odio vitae vestibulum vestibulum.</h3>
-            <ButtonPrimary>Order Now</ButtonPrimary>
+            <ButtonPrimary to="/">Order Now</ButtonPrimary>
           </Container>
         </SectionPromotionalSecondary>
         <SectionSearch>
           <SearchWrapper>
             <h2>Search the Best Burguers</h2>
-            <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit. Vivamus
+            <h3>Lorem ipsum dolor sit amet, consectetur, adispicing elit.
+              Vivamus
               lacinia odio vitae vestibulum vestibulum.</h3>
             <SearchWidgetComponent/>
-            <ButtonSecondary>Search</ButtonSecondary>
           </SearchWrapper>
         </SectionSearch>
         <SectionPackages>
@@ -87,29 +85,29 @@ export default class Home extends React.Component {
             <PackageList>
               <PackageCard>
                 <h3>Package 1</h3>
-                <Icon icon={faHamburger} />
+                <Icon icon={faHamburger}/>
                 <span>Price</span>
                 <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <ButtonPrimary>Order Now</ButtonPrimary>
+                <ButtonPrimary to="/">Order Now</ButtonPrimary>
               </PackageCard>
               <PackageCard>
                 <h3>Package 2</h3>
-                <Icon icon={faHamburger} />
+                <Icon icon={faHamburger}/>
                 <span>Price</span>
                 <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <ButtonPrimary>Order Now</ButtonPrimary>
+                <ButtonPrimary to="/">Order Now</ButtonPrimary>
               </PackageCard>
               <PackageCard>
                 <h3>Package 3</h3>
-                <Icon icon={faHamburger} />
+                <Icon icon={faHamburger}/>
                 <span>Price</span>
                 <p>Lorem ipsum dolor sit amen, consectetur adispicing elit.</p>
-                <ButtonPrimary>Order Now</ButtonPrimary>
+                <ButtonPrimary to="/">Order Now</ButtonPrimary>
               </PackageCard>
             </PackageList>
           </Container>
         </SectionPackages>
       </div>
-    );
+    )
   }
 }

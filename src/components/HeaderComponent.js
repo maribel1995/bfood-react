@@ -12,6 +12,7 @@ const Header = styled.header`
   width: 100%;
   color: #fff;
   line-height: 3.25rem;
+  background-color: #222323;
 `
 const HeaderContainer = styled(Container)`
   display: flex;
