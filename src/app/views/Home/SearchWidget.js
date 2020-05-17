@@ -53,12 +53,25 @@ export default class extends React.Component {
   constructor (props) {
     super(props)
     this.state = { search: '', items: [], isLoaded: false, selected: 0 }
-    this.handleChange = this.handleChange.bind(this)
+    this.listCities = this.listCities.bind(this)
     this.selectItem = this.selectItem.bind(this)
     this.getResults = this.getResults.bind(this)
   }
 
-  handleChange (event) {
+  getCities(search) {
+    const headers = new Headers()
+    headers.set('user-key', '77576b2dae845bf32c1de0795a7753e1')
+
+    return fetch(
+      `https://developers.zomato.com/api/v2.1/cities?q=${search}`,
+      { headers: headers })
+  }
+
+  selectItem ({ name, id }) {
+    this.setState({ selected: id, search: name })
+  }
+
+  listCities (event) {
     this.setState({ search: event.target.value })
 
     if (event.target.value.length < 4)
@@ -84,19 +97,6 @@ export default class extends React.Component {
     )
   }
 
-  getCities(search) {
-    const headers = new Headers()
-    headers.set('user-key', '77576b2dae845bf32c1de0795a7753e1')
-
-    return fetch(
-      `https://developers.zomato.com/api/v2.1/cities?q=${search}`,
-      { headers: headers })
-  }
-
-  selectItem ({ name, id }) {
-    this.setState({ selected: id, search: name })
-  }
-
   getResults () {
     const selected = this.state.selected
     return (
@@ -110,7 +110,7 @@ export default class extends React.Component {
       <SearchComponent>
         <InputField>
           <Icon icon={faMapMarkerAlt}/>
-          <SearchInput value={this.state.search} onChange={this.handleChange}
+          <SearchInput value={this.state.search} onChange={this.listCities}
                        placeholder="Ex. São Paulo" className="cities-input"
                        aria-label="Buscar restaurantes por Cidade"
           />

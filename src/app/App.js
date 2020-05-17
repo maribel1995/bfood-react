@@ -9,13 +9,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <HeaderComponent />
-
         <Switch className="page">
           <Route path="/search/:city">
+            <HeaderComponent />
             <Search/>
           </Route>
           <Route path="/">
+            <HeaderComponent />
             <Home/>
           </Route>
         </Switch>
