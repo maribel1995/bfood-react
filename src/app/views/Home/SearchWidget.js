@@ -52,11 +52,14 @@ const SearchInput = styled(Input)`
 
 export default class extends React.Component {
   constructor (props) {
+    window.scrollTo(0, 0);
     super(props)
-    this.state = { search: '', items: [], isLoaded: false, selected: 0 }
+    this.state = { search: '', items: [], isLoaded: false, selected: 0, controller: null }
+
     this.listCities = this.listCities.bind(this)
     this.selectItem = this.selectItem.bind(this)
     this.getResults = this.getResults.bind(this)
+    this.clearInput = this.clearInput.bind(this)
   }
 
   selectItem ({ name, id }) {
@@ -66,10 +69,14 @@ export default class extends React.Component {
   listCities (event) {
     this.setState({ search: event.target.value })
 
-    if (event.target.value.length < 4)
-      return
+    if (this.state.controller) {
+      this.state.controller.abort();
+    }
 
-    getCities(this.state.search).then(res => res.json())
+    const controller = new AbortController();
+    this.setState({ controller: controller });
+
+    getCities(this.state.search, controller.signal).then(res => res.json())
     .then(
       (result) => {
         this.setState({
@@ -89,6 +96,10 @@ export default class extends React.Component {
     )
   }
 
+  clearInput() {
+    this.setState({ search: '', isLoaded: false, selected: 0 })
+  }
+
   getResults () {
     const selected = this.state.selected
     return (
@@ -103,6 +114,7 @@ export default class extends React.Component {
         <InputField>
           <Icon icon={faMapMarkerAlt}/>
           <SearchInput value={this.state.search} onChange={this.listCities}
+                       onClick={this.clearInput}
                        placeholder="Ex. São Paulo" className="cities-input"
                        aria-label="Buscar restaurantes por Cidade"
           />

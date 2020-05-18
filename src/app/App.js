@@ -11,11 +11,11 @@ function App() {
       <Router>
         <Switch className="page">
           <Route path="/search/:city">
-            <HeaderComponent className='header-home' />
+            <HeaderComponent />
             <Search/>
           </Route>
           <Route path="/">
-            <HeaderComponent className='pages-header' />
+            <HeaderComponent isTransparentHeader={true} />
             <Home/>
           </Route>
         </Switch>

@@ -8,7 +8,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { getRestaurants } from '../../repository'
 
 const Section = styled.section`
-  padding: 100px 0;
+  padding: 150px 0;
   background-color: ${props => props.theme.secondary};
 `
 const RestaurantsList = styled.section`
@@ -44,6 +44,7 @@ const FilterOption = styled.input`
 
 class Search extends React.Component {
   constructor (props) {
+    window.scrollTo(0, 0);
     const { match } = props
     super(props)
     this.state = {

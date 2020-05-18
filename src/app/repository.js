@@ -8,8 +8,8 @@ export const getRestaurants = (search) => {
     { headers: headers })
 }
 
-export const getCities = (search) => {
+export const getCities = (search, signal) => {
   return fetch(
     `${baseUrl}/cities?q=${search}`,
-    { headers: headers })
+    { headers: headers, signal })
 }

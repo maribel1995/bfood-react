@@ -12,6 +12,9 @@ const Header = styled.header`
   width: 100%;
   color: #fff;
   line-height: 6.25rem;
+  background-color: #000;
+`
+const HeaderTransparent = styled(Header)`
   background: linear-gradient(rgba(0,0,0,.9), rgba(0,0,0,0));
 `
 const HeaderContainer = styled(Container)`
@@ -26,13 +29,23 @@ const Logo = styled(FontAwesomeIcon)`
 
 export default class extends React.Component {
   render () {
+    const header = this.props.isTransparentHeader ?
+      <HeaderTransparent>
+        <HeaderContainer>
+          <Logo icon={faHamburger} />
+          <NavComponent />
+        </HeaderContainer>
+      </HeaderTransparent>
+      :
+      <Header>
+        <HeaderContainer>
+          <Logo icon={faHamburger} />
+          <NavComponent />
+        </HeaderContainer>
+      </Header>;
+
     return (
-        <Header>
-          <HeaderContainer>
-            <Logo icon={faHamburger} />
-            <NavComponent />
-          </HeaderContainer>
-        </Header>
+      header
     )
   }
 }
