@@ -19,8 +19,9 @@ const Card = styled.li`
   text-align: center;
   margin: 10px;
   box-sizing: border-box;
+  color: ${props => props.theme.primary};
 `
-const Price = styled.span`
+const Value = styled.span`
   font-size: 2rem;
 `
 
@@ -29,7 +30,7 @@ export default class extends React.Component {
     return <Card>
       <h3>{ this.props.name }</h3>
       <HamburgerIcon icon={faHamburger}/>
-      <Price>{ this.props.price }</Price>
+      <Value>{ this.props.value }</Value>
       <p>{ this.props.description }</p>
       <ButtonPrimary to={this.props.path}>Order Now</ButtonPrimary>
     </Card>

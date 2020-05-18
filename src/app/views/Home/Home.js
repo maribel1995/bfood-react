@@ -99,9 +99,9 @@ export default class Home extends React.Component {
           <Container>
             <h2>Popular Package</h2>
             <PackageList>
-              <CardComponent name="Package 1" price="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
-              <CardComponent name="Package 1" price="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
-              <CardComponent name="Package 1" price="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
+              <CardComponent name="Package 1" value="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
+              <CardComponent name="Package 1" value="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
+              <CardComponent name="Package 1" value="$ 10.00" description="Lorem ipsum dolor sit amet, consectetur adispicing elit." path="/" />
             </PackageList>
           </Container>
         </SectionPackages>

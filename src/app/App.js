@@ -11,11 +11,11 @@ function App() {
       <Router>
         <Switch className="page">
           <Route path="/search/:city">
-            <HeaderComponent />
+            <HeaderComponent className='header-home' />
             <Search/>
           </Route>
           <Route path="/">
-            <HeaderComponent />
+            <HeaderComponent className='pages-header' />
             <Home/>
           </Route>
         </Switch>

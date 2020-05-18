@@ -1,8 +1,11 @@
 import React from 'react'
 import { Container } from '../../style/styles'
 import styled from 'styled-components'
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router'
 import Card from '../../shared/Card'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { getRestaurants } from '../../repository'
 
 const Section = styled.section`
   padding: 100px 0;
@@ -12,33 +15,108 @@ const RestaurantsList = styled.section`
   display: flex;
   flex-wrap: wrap;
 `
+const SearchWrapper = styled.div`
+  display: flex;
+  align-items: start;
+`
+const Filters = styled.div`
+  min-width: 350px;
+  padding: 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+  margin: 10px;
+  border-radius: 10px;
+`
+const FilterList = styled.ul`
+  list-style: none;
+  padding: 0;
+  line-height: 2.5rem;
+`
+const StarIcon = styled(FontAwesomeIcon)`
+  color: #F6C63C;
+  font-size: 1.5rem;
+`
+const FilterOption = styled.input`
+  margin-right: 10px;
+  width: 1rem;
+  height: 1rem;
+`
+
 class Search extends React.Component {
   constructor (props) {
-    const { match } = props;
+    const { match } = props
     super(props)
-    this.state = { restaurants: [], isLoaded: false, city: match.params.city }
+    this.state = {
+      restaurants: [],
+      filteredRestaurants: [],
+      isLoaded: false,
+      city: match.params.city,
+      filters: {
+        review: {
+          values: [
+            { value: 1, checked: false },
+            { value: 2, checked: false },
+            { value: 3, checked: false },
+            { value: 4, checked: false },
+            { value: 5, checked: false },
+          ],
+          rule: ({ user_rating: {aggregate_rating} }, review) => {
+            return Math.floor(aggregate_rating) === review.value;
+          },
+        },
+        cost: {
+          values: [
+            { min: 0, max: 50, label: 'R$ 50.00', checked: false },
+            { min: 50, max: 80, label: 'R$ 50.00 a R$80.00', checked: false },
+            { min: 80, max: 110, label: 'R$ 80.00 a R$110.00', checked: false },
+            { min: 110, max: 999, label: 'R$ 110.00 or more', checked: false },
+          ],
+          rule: ({average_cost_for_two}, cost) => {
+            return average_cost_for_two >= cost.min && average_cost_for_two < cost.max;
+          },
+        },
+      },
+    }
+    this.handleFilterChange = this.handleFilterChange.bind(this)
+    this.getFilterCheckboxes = this.getFilterCheckboxes.bind(this)
   }
 
-  getRestaurants(search) {
-    const headers = new Headers()
-    headers.set('user-key', '77576b2dae845bf32c1de0795a7753e1')
-
-    return fetch(
-      `https://developers.zomato.com/api/v2.1/search?city_id=${search}`,
-      { headers: headers })
+  buildRestaurantCard ({ name, id, location: { address }, user_rating: { aggregate_rating } }) {
+    return (
+      <Card name={name} value={this.getStars(Math.floor(aggregate_rating))}
+            description={address} path="/" key={id}/>)
   }
 
-  buildRestaurantCard({ name, id, location: { address } }) {
-    return(<Card name={name} description={address} path="/" key={id} />);
+  getStars (number) {
+    const stars = new Array(number)
+    for (var i = 0; i < number; i++) {
+      stars.push(<StarIcon icon={faStar} key={i}/>)
+    }
+    return (
+      <span>{stars}</span>
+    )
+  }
+
+  getFilterCheckboxes (filterName) {
+    return (
+      this.state.filters[filterName].values.map(
+        (filter, index) =>
+          <li key={`filter-${filterName}-${index}`}>
+            <FilterOption type="checkbox" name={filterName} onChange={(evt) => this.handleFilterChange(index, evt)}/>
+            {filterName === 'review' ? this.getStars(filter.value) : filter.label}
+          </li>
+      )
+    )
   }
 
   componentDidMount () {
-    this.getRestaurants(this.state.city).then(res => res.json())
+    getRestaurants(this.state.city).then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            restaurants: result.restaurants.map(({restaurant}) => this.buildRestaurantCard(restaurant))
+            restaurants: result.restaurants,
+            filteredRestaurants: result.restaurants
           })
         },
         (error) => {
@@ -50,15 +128,66 @@ class Search extends React.Component {
       )
   }
 
+  handleFilterChange (index, {target: {name , checked}}) {
+    const changedFilter = this.state.filters[name];
+    changedFilter.values[index].checked = checked;
+
+    //updating just updated filter
+    this.setState(prevState => ({
+      filters: {
+        ...prevState.filters,
+        changedFilter
+      }
+    }));
+
+    const filteredByReview = this.applyFilter(this.state.restaurants, this.state.filters.review);
+    const filteredByCost = this.applyFilter(this.state.restaurants, this.state.filters.cost);
+
+    if (!filteredByReview.optionsApplied.length && !filteredByCost.optionsApplied.length) {
+      this.setState({filteredRestaurants: this.state.restaurants});
+      this.forceUpdate();
+      return;
+    }
+
+    const uniqueRestaurants = new Set([...filteredByReview.restaurants, ...filteredByCost.restaurants].flat(1));
+    this.setState({filteredRestaurants: [...uniqueRestaurants]});
+    this.forceUpdate();
+  }
+
+  applyFilter(restaurants, filter) {
+    const selectedOptions = filter.values.filter(option => option.checked)
+
+    const filteredRestaurants = [];
+    selectedOptions.forEach(review => {
+      filteredRestaurants.push(restaurants.filter(({restaurant}) => filter.rule(restaurant, review)))
+    })
+
+    return {optionsApplied: selectedOptions, restaurants: filteredRestaurants};
+  }
+
   render () {
     return (
       <Section>
         <Container>
-
           <h1>Results For: </h1>
-          <RestaurantsList>
-            {this.state.restaurants}
-          </RestaurantsList>
+          <SearchWrapper>
+            <Filters>
+              <h3>Note</h3>
+              <FilterList>
+                {this.getFilterCheckboxes('review')}
+              </FilterList>
+
+              <h3>Cost</h3>
+              <FilterList>
+                {this.getFilterCheckboxes('cost')}
+              </FilterList>
+            </Filters>
+
+            <RestaurantsList>
+              {this.state.filteredRestaurants.map(({restaurant}) => this.buildRestaurantCard(restaurant))}
+            </RestaurantsList>
+          </SearchWrapper>
+
         </Container>
       </Section>
     )

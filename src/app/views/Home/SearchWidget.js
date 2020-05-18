@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ButtonSecondary } from '../../style/styles'
+import { getCities } from '../../repository'
 
 const Input = styled.input`
   border: none;
@@ -58,15 +59,6 @@ export default class extends React.Component {
     this.getResults = this.getResults.bind(this)
   }
 
-  getCities(search) {
-    const headers = new Headers()
-    headers.set('user-key', '77576b2dae845bf32c1de0795a7753e1')
-
-    return fetch(
-      `https://developers.zomato.com/api/v2.1/cities?q=${search}`,
-      { headers: headers })
-  }
-
   selectItem ({ name, id }) {
     this.setState({ selected: id, search: name })
   }
@@ -77,7 +69,7 @@ export default class extends React.Component {
     if (event.target.value.length < 4)
       return
 
-    this.getCities(this.state.search).then(res => res.json())
+    getCities(this.state.search).then(res => res.json())
     .then(
       (result) => {
         this.setState({
